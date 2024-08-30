@@ -19,16 +19,8 @@ import detector from "../../assets/detector.png";
 import axios from "axios";
 import VariableContext from "../../../context/VariableContext";
 
-const Search = ({
-  setFilteredCard,
-  setSearch,
-  search,
-  allCard,
-  cart,
-}) => {
+const Search = ({ setFilteredCard, setSearch, search, allCard, cart }) => {
   const [resultList, setResultList] = useState([]);
-  const [city, setCity] = useState("Guidy");
-  const [state, setState] = useState("Chennai");
 
   const { setLocation } = useContext(VariableContext);
 
@@ -54,10 +46,15 @@ const Search = ({
   };
 
   async function getLocation(lat, long) {
-    const location = await axios.get(`
-    http://api.weatherapi.com/v1/current.json?key=d4f97f088a0547d9b1d81430241506&q=${lat},${long}&aqi=yes`);
-    setCity(location?.data?.location?.name);
-    setState(location?.data?.location?.region);
+    try {
+      const res = await fetch(`
+        http://api.weatherapi.com/v1/current.json?key=d4f97f088a0547d9b1d81430241506&q=${lat},${long}&aqi=yes`);
+      const data = await res.json();
+      // setCity(data?.location?.name);
+      // setState(data?.location?.region);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const successLocation = async (position) => {
@@ -68,62 +65,60 @@ const Search = ({
   };
 
   const handleDetectLocation = () => {
-    const obj = navigator.geolocation.getCurrentPosition(
-      successLocation,
-    );
+    const obj = navigator.geolocation.getCurrentPosition(successLocation);
   };
 
   return (
     <div className={styles.search}>
-        <Accordion allowMultiple>
-          <AccordionItem
-            className={styles["location-detector"]}
-            borderBottomWidth="0px"
-            borderTopWidth="0px"
-            borderRadius="5px"
-            maxW="fit-content"
-            data-testid="accordian"
-          >
-            <h2>
-              <AccordionButton _expanded={{ bg: "#163c48", color: "white" }}>
-                <Box
-                  as="span"
-                  flex="1"
-                  textAlign="left"
-                  display="flex"
-                  alignContent="center"
-                  justifyContent="center"
-                  gap="4px"
-                >
-                  <Image src={location} boxSize="28px" />
-                  <Text pt="2px">
-                    {city}, {state}
-                  </Text>
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel
-              bg="white"
-              className={styles["accordian-panal"]}
-              pb="0px"
-              pt="0px"
-              borderRadius="5px"
-            >
+      <Accordion allowMultiple>
+        <AccordionItem
+          className={styles["location-detector"]}
+          borderBottomWidth="0px"
+          borderTopWidth="0px"
+          borderRadius="5px"
+          maxW="fit-content"
+          data-testid="accordian"
+        >
+          <h2>
+            <AccordionButton _expanded={{ bg: "#163c48", color: "white" }}>
               <Box
+                as="span"
+                flex="1"
+                textAlign="left"
                 display="flex"
                 alignContent="center"
                 justifyContent="center"
-                gap="6px"
-                className={styles["accordian-panal-detect"]}
-                onClick={handleDetectLocation}
+                gap="4px"
               >
-                <Image src={detector} boxSize="26px" />
-                <Text color="#e43636">Detect your location</Text>
+                <Image src={location} boxSize="28px" />
+                <Text pt="2px">
+                  Location
+                </Text>
               </Box>
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel
+            bg="white"
+            className={styles["accordian-panal"]}
+            pb="0px"
+            pt="0px"
+            borderRadius="5px"
+          >
+            <Box
+              display="flex"
+              alignContent="center"
+              justifyContent="center"
+              gap="6px"
+              className={styles["accordian-panal-detect"]}
+              onClick={handleDetectLocation}
+            >
+              <Image src={detector} boxSize="26px" />
+              <Text color="#e43636">Detect your location</Text>
+            </Box>
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
 
       <Box position="relative">
         <Image
