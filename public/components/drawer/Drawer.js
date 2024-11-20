@@ -32,7 +32,6 @@ const MyDrawer = () => {
 
   const logout = () => {
     dispatch(clearAllCart());
-    
     signOut(auth);
 
     toast({
