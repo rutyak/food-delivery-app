@@ -87,5 +87,7 @@
 
   .restaurant-grid-filter{
     display: ruby-text;
+    display: flex;
+    flex-direction: column;
   }
 }

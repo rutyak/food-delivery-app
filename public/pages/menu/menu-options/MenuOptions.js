@@ -18,8 +18,6 @@ const MenuOptions = ({ options }) => {
       {!options?.carousel && (
         <Accordion
           allowMultiple
-          w="795px"
-          ml="-26px"
           bg="white"
           className="acco-items"
         >

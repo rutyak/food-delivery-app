@@ -86,3 +86,9 @@
     margin: 13px !important;
   }
 }
+
+@media (max-width: 768px) {
+  .card-menu{
+    max-width: 729px;
+  }
+}

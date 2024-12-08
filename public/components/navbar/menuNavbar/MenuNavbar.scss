@@ -59,10 +59,19 @@
 
 @media (max-width: 884px) {
   .menu-header{
-    gap: 319px;
+    gap: 250px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
+@media (max-width: 768px) {
+  .menu-header{
+    gap: 250px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
 
 
 
