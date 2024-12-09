@@ -16,8 +16,8 @@ import { useContext, useState } from "react";
 import serchIcon from "../../assets/search.png";
 import location from "../../assets/location.png";
 import detector from "../../assets/detector.png";
-import axios from "axios";
 import VariableContext from "../../../context/VariableContext";
+const Location_url = process.env.REACT_APP_LOCATION_API_URL
 
 const Search = ({ setFilteredCard, setSearch, search, allCard, cart }) => {
   const [resultList, setResultList] = useState([]);
@@ -48,7 +48,7 @@ const Search = ({ setFilteredCard, setSearch, search, allCard, cart }) => {
   async function getLocation(lat, long) {
     try {
       const res = await fetch(`
-        http://api.weatherapi.com/v1/current.json?key=d4f97f088a0547d9b1d81430241506&q=${lat},${long}&aqi=yes`);
+        ${Location_url}&q=${lat},${long}`);
       const data = await res.json();
       // setCity(data?.location?.name);
       // setState(data?.location?.region);

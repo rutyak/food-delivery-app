@@ -11,6 +11,7 @@ import VariableContext from "../../../../context/VariableContext";
 import { useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../../../public/Firebase";
+const Base_url = process.env.REACT_APP_RESTAURANTS_API_URL;
 
 const Body = () => {
   const [search, setSearch] = useState("");
@@ -51,7 +52,7 @@ const Body = () => {
       setIsLoading(true);
       try {
         const res = await fetch(
-          `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${location.lat}&lng=${location.long}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+          `${Base_url}&lat=${location.lat}&lng=${location.long}`
         );
         const data = await res.json();
 
@@ -85,7 +86,7 @@ const Body = () => {
   async function getData() {
     try {
       const res = await fetch(
-        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${location.lat}&lng=${location.long}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+        `${Base_url}&lat=${location.lat}&lng=${location.long}`
       );
       const data = await res.json();
       setData(data?.data);

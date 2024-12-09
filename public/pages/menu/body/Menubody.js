@@ -18,6 +18,7 @@ import Footer from "../../home/footer/Footer";
 import * as menuFooter from "../MenuFooter.module.scss";
 import Shimmer from "../../../components/shimmer-effect/Shimmer";
 import * as menuShimmerStyle from "../../../components/shimmer-effect/MenuShimmer.module.scss";
+const Menu_url = process.env.REACT_APP_MENU_API_URL;
 
 const Menubody = () => {
   const { id } = useParams();
@@ -32,7 +33,7 @@ const Menubody = () => {
   async function getMenumenu() {
     try {
       const res = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.89960&lng=80.22090&restaurantId=${id}&catalog_qa=undefined&submitAction=ENTER`
+        `${Menu_url}&restaurantId=${id}`
       );
       const data = await res.json();
       setMenu(data?.data?.cards);
