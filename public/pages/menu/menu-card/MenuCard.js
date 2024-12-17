@@ -18,10 +18,10 @@ const MenuCard = ({
   imageId,
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const [isCliked, setIsClicked] = useState(false);
+  const [isAdded, setIsAdded]  = useState(false);
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (id) => {
     const itemDetails = {
       id,
       name,
@@ -31,8 +31,8 @@ const MenuCard = ({
       imageId,
       quantity,
     };
-    !isCliked && dispatch(addCart(itemDetails));
-    setIsClicked(true);
+    !isAdded && dispatch(addCart(itemDetails));
+    setIsAdded(true);
   };
 
   const handleDecrease = () => {
@@ -115,7 +115,7 @@ const MenuCard = ({
                   p="2px"
                   onClick={handleIncrease}
                 />
-                <Button colorScheme="teal" onClick={handleAddToCart}>
+                <Button colorScheme="teal" onClick={()=>handleAddToCart(id)}>
                   ADD (<Text>{quantity}</Text>)
                 </Button>
                 <MinusIcon

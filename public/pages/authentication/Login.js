@@ -70,26 +70,26 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignIn = () => {
-    const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleProvider)
-      .then((res) => {
-        toast({
-          title: "Account SignIn Successfully!!",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-      })
-      .catch((e) => {
-        toast({
-          title: e.message,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      });
-  };
+  // const handleGoogleSignIn = () => {
+  //   const googleProvider = new GoogleAuthProvider();
+  //   signInWithPopup(auth, googleProvider)
+  //     .then((res) => {
+  //       toast({
+  //         title: "Account SignIn Successfully!!",
+  //         status: "success",
+  //         duration: 3000,
+  //         isClosable: true,
+  //       });
+  //     })
+  //     .catch((e) => {
+  //       toast({
+  //         title: e.message,
+  //         status: "error",
+  //         duration: 3000,
+  //         isClosable: true,
+  //       });
+  //     });
+  // };
 
   return (
     <>
@@ -125,12 +125,12 @@ const Login = () => {
                   />
                 </FormControl>
 
-                <HStack justify="space-between" width="100%" mb="16px">
+                {/* <HStack justify="space-between" width="100%" mb="16px">
                   <Checkbox defaultChecked>Remember me</Checkbox>
                   <Button variant="text" size="sm">
                     Forgot password?
                   </Button>
-                </HStack>
+                </HStack> */}
                 <WrapItem>
                   <Button
                     colorScheme="yellow"
@@ -140,11 +140,11 @@ const Login = () => {
                     Login
                   </Button>
                 </WrapItem>
-                <p className="or">Or</p>
+                {/* <p className="or">Or</p>
                 <Button className="google-btn" onClick={handleGoogleSignIn}>
                   <GoogleIcon />
                   <p>Sign in with google</p>
-                </Button>
+                </Button> */}
               </TabPanel>
               <TabPanel>
                 <SignUp onClose={onClose} />

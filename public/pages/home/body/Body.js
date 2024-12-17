@@ -77,6 +77,7 @@ const Body = () => {
   };
 
   eventRef.current = debounce(handleInfiniteScroll, 100);
+  
   useEffect(() => {
     addEventListener("scroll", eventRef.current);
 

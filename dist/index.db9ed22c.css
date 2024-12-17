@@ -46,7 +46,6 @@
 
 .top-carousal-card {
   width: 155px;
-  height: 180px;
 }
 
 .carousel-card {
@@ -484,6 +483,7 @@
 
 .login-btn {
   width: 100%;
+  margin-top: 40px;
 }
 
 .or {

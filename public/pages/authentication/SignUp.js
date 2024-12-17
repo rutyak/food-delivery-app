@@ -61,26 +61,26 @@ const SignUp = ({ onClose }) => {
     }
   };
 
-  const handleGoogleSignIn = () => {
-    const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleProvider)
-      .then((res) => {
-        toast({
-          title: "Account SignIn Successfully!!",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-      })
-      .catch((e) => {
-        toast({
-          title: e.message,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      });
-  };
+  // const handleGoogleSignIn = () => {
+  //   const googleProvider = new GoogleAuthProvider();
+  //   signInWithPopup(auth, googleProvider)
+  //     .then((res) => {
+  //       toast({
+  //         title: "Account SignIn Successfully!!",
+  //         status: "success",
+  //         duration: 3000,
+  //         isClosable: true,
+  //       });
+  //     })
+  //     .catch((e) => {
+  //       toast({
+  //         title: e.message,
+  //         status: "error",
+  //         duration: 3000,
+  //         isClosable: true,
+  //       });
+  //     });
+  // };
 
   return (
     <TabPanel className="signup-body">
@@ -121,11 +121,11 @@ const SignUp = ({ onClose }) => {
           Sign Up
         </Button>
       </WrapItem>
-      <p className="or">Or</p>
+      {/* <p className="or">Or</p>
       <Button className="google-btn" width="100%" onClick={handleGoogleSignIn}>
         <GoogleIcon />
         <p>Sign up with google</p>
-      </Button>
+      </Button> */}
     </TabPanel>
   );
 };
