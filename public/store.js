@@ -5,18 +5,16 @@ import cartReducer from "./slice/cartSlice";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-    key: "root",
+    key: "cart",
     storage
 } 
 
 const rootReducer = combineReducers({
-    cart: cartReducer,
+    cart: persistReducer(persistConfig, cartReducer)
 })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
-    reducer: persistedReducer
+    reducer: rootReducer
 })
 
 const persistor = persistStore(store);

@@ -7,11 +7,11 @@ const cartSlice = createSlice({
   },
   reducers: {
     addCart: (state, action) => {
-      const exists = state.cartItems.find(
+      const index = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (exists) {
-        exists.quantity += 1;
+      if (index) {
+        state.cartItems[index].quantity += 1;
       } else {
         state.cartItems.push({ ...action.payload, quantity: 1 });
       }

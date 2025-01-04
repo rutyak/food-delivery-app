@@ -20,7 +20,6 @@ import Shimmer from "../../../components/shimmer-effect/Shimmer";
 import * as menuShimmerStyle from "../../../components/shimmer-effect/MenuShimmer.module.scss";
 import VariableContext from "../../../../context/VariableContext";
 const Menu_url = process.env.REACT_APP_MENU_API_URL;
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"; // public CORS proxy
 
 const Menubody = () => {
   const { id } = useParams();

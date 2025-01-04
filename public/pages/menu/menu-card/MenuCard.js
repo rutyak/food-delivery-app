@@ -26,11 +26,9 @@ const MenuCard = ({
 
   const handleAddToCart = (id) => {
     
-    let itemQuantity =  cartData?.filter((item) => item.id === id).map((item) => item.quantity );
+    let itemQuantity =  cartData?.find((item) => item.id === id)
 
-    if(itemQuantity > 0){
-      setQuantity((prev) => prev + 1);
-    }
+    let currentQuantity = itemQuantity?.quantity ?? 0; // itemQuantity?.quantity = undefined then return 0
 
     const itemDetails = {
       id,
@@ -39,18 +37,12 @@ const MenuCard = ({
       price,
       defaultPrice,
       imageId,
-      quantity,
+      quantity: currentQuantity + 1,
     };
-    console.log(quantity);
+    console.log(currentQuantity);
     dispatch(addCart(itemDetails));
-  };
 
-  const handleDecrease = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
-
-  const handleIncrease = () => {
-    setQuantity((prev) => prev + 1);
+    setQuantity((prev)=> prev + 1);
   };
 
   return (
@@ -118,49 +110,17 @@ const MenuCard = ({
                 objectFit="cover"
               />
               <Box className="add-btn">
-                {/* <AddIcon
-                  borderRadius="3px"
-                  bg="#319795"
-                  boxSize={5}
-                  color="white"
-                  p="2px"
-                  onClick={handleIncrease}
-                /> */}
                 <Button colorScheme="teal" onClick={() => handleAddToCart(id)}>
-                  ADD (<Text>{quantity}</Text>)
+                  <Text>ADD ({quantity})</Text>
                 </Button>
-                {/* <MinusIcon
-                  borderRadius="3px"
-                  bg="#319795"
-                  boxSize={5}
-                  color="white"
-                  p="2px"
-                  onClick={handleDecrease}
-                /> */}
               </Box>
             </Box>
           </>
         ) : (
           <Box className="add-btn-without-img">
-            <AddIcon
-              borderRadius="3px"
-              bg="#319795"
-              boxSize={5}
-              color="white"
-              p="2px"
-              onClick={handleIncrease}
-            />
-            <Button colorScheme="teal" onClick={handleAddToCart}>
+            <Button colorScheme="teal" onClick={() => handleAddToCart(id)}>
               ADD (<Text>{quantity}</Text>)
             </Button>
-            <MinusIcon
-              borderRadius="3px"
-              bg="#319795"
-              boxSize={5}
-              color="white"
-              p="2px"
-              onClick={handleDecrease}
-            />
           </Box>
         )}
       </Box>
