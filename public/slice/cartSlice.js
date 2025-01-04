@@ -10,7 +10,9 @@ const cartSlice = createSlice({
       const index = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (index) {
+
+      console.log("index:",index);
+      if (index !== -1) {
         state.cartItems[index].quantity += 1;
       } else {
         state.cartItems.push({ ...action.payload, quantity: 1 });

@@ -34,7 +34,9 @@ const Menubody = () => {
 
   async function getMenumenu() {
     try {
-      const res = await fetch(`${Menu_url}?lat=${location.lat}&lng=${location.long}&id=${id}`);
+      const res = await fetch(
+        `${Menu_url}?lat=${location.lat}&lng=${location.long}&id=${id}`
+      );
 
       const data = await res.json();
 
@@ -117,11 +119,13 @@ const Menubody = () => {
           </Box>
         </Box>
         <Box className="list-items">
-          {menuOpt?.map((item) => {
+          {menuOpt?.map((item, index) => {
             if (item?.card?.card?.title) {
               return (
                 <MenuOptions
-                  key={item?.card?.card?.id}
+                  key={`menu-options-${
+                    item?.card?.card?.id || "no-id"
+                  }-${index}`}
                   options={item?.card?.card}
                 />
               );

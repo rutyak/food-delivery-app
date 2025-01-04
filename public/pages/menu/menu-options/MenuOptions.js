@@ -12,15 +12,10 @@ import "./MenuOptions.scss";
 import CustomAccordion from "../../../components/accordian/CustomAccordion";
 
 const MenuOptions = ({ options }) => {
-
   return (
     <>
       {!options?.carousel && (
-        <Accordion
-          allowMultiple
-          bg="white"
-          className="acco-items"
-        >
+        <Accordion allowMultiple bg="white" className="acco-items">
           <AccordionItem borderTopWidth="0px">
             <h2>
               <AccordionButton
@@ -35,14 +30,22 @@ const MenuOptions = ({ options }) => {
             </h2>
             <AccordionPanel>
               {options?.itemCards?.length > 0 &&
-                options?.itemCards?.map((card) => {
+                options?.itemCards?.map((card, index) => {
                   return (
-                    <MenuCard key={card?.card?.info} {...card?.card?.info} />
+                    <MenuCard
+                      key={`${card?.card?.info?.id || "menu-card"}-${index}`}
+                      {...card?.card?.info}
+                    />
                   );
                 })}
               {options?.categories?.length > 0 &&
-                options?.categories?.map((cat) => {
-                  return <CustomAccordion {...cat} />;
+                options?.categories?.map((cat, index) => {
+                  return (
+                    <CustomAccordion
+                      key={`${cat?.id || "custom-accordion"}-${index}`}
+                      {...cat}
+                    />
+                  );
                 })}
             </AccordionPanel>
           </AccordionItem>

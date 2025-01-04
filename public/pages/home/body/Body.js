@@ -161,10 +161,11 @@ const Body = () => {
         />
         <Box className="restaurant-grid-card">
           {filteredCard?.length > 0 &&
-            filteredCard?.map((data) => {
+            filteredCard?.map((data, index) => {
+              const uniqueKey = data?.info?.id || `fallback-${index}`
               return (
                 <>
-                  <Card {...data?.info} grid="grid" key={data?.info?.id} />
+                  <Card key={uniqueKey} {...data?.info} grid="grid"/>
                 </>
               );
             })}
