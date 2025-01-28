@@ -38,7 +38,7 @@ const Menubody = () => {
         `${Menu_url}?lat=${location.lat}&lng=${location.long}&id=${id}`
       );
 
-      const data = await res.json();
+      const data = await res?.json();
 
       console.log("menu cards: ", data);
       setMenu(data?.data?.cards);
@@ -49,7 +49,7 @@ const Menubody = () => {
           : data?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
       setMenuOpt(menuFetched);
     } catch (error) {
-      console.log("error: ", error);
+      console.error("error: ", error);
     }
   }
 

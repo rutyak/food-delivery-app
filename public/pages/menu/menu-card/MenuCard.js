@@ -1,11 +1,12 @@
-import { Box, Text, Heading, Image, Button } from "@chakra-ui/react";
+import { Box, Text, Heading, Image, Button, useToast } from "@chakra-ui/react";
 import "./MenuCard.scss";
 import starIcon from "../../../assets/star-icon.png";
 import rupee from "../../../assets/rupee.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../../slice/cartSlice";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../Firebase";
 
 const MenuCard = ({
   id,
@@ -21,28 +22,41 @@ const MenuCard = ({
   const [isAdded, setIsAdded] = useState(false);
   const [isExpanded, setIsExapanded] = useState(false);
   const dispatch = useDispatch();
+  const [user] = useAuthState(auth);
+
+  const toast = useToast();
 
   const cartData = useSelector((store) => store.cart.cartItems);
 
   const handleAddToCart = (id) => {
-    
-    let itemQuantity =  cartData?.find((item) => item.id === id)
+    console.log("user: ", user);
 
-    let currentQuantity = itemQuantity?.quantity ?? 0; // itemQuantity?.quantity = undefined then return 0
+    if (!user) {
+      toast({
+        title: "Please login to access the cart!!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      let itemQuantity = cartData?.find((item) => item.id === id);
 
-    const itemDetails = {
-      id,
-      name,
-      ratings,
-      price,
-      defaultPrice,
-      imageId,
-      quantity: currentQuantity + 1,
-    };
-    console.log(currentQuantity);
-    dispatch(addCart(itemDetails));
+      let currentQuantity = itemQuantity?.quantity ?? 0; // itemQuantity?.quantity = undefined then return 0
 
-    setQuantity((prev)=> prev + 1);
+      const itemDetails = {
+        id,
+        name,
+        ratings,
+        price,
+        defaultPrice,
+        imageId,
+        quantity: currentQuantity + 1,
+      };
+      console.log(currentQuantity);
+      dispatch(addCart(itemDetails));
+
+      setQuantity((prev) => prev + 1);
+    }
   };
 
   return (

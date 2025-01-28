@@ -23,7 +23,7 @@ const MenuOptions = ({ options }) => {
                 borderRadius="10px"
               >
                 <Box as="span" flex="1" textAlign="left">
-                  {options.title} ({options?.itemCards?.length})
+                  {options.title} {options?.itemCards?.length > 0? `(${options?.itemCards?.length})` : ""}
                 </Box>
                 <AccordionIcon />
               </AccordionButton>

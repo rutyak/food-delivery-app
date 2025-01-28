@@ -26,12 +26,19 @@ const Body = () => {
   const loc = useLocation();
   const [user] = useAuthState(auth);
 
-  if (!user && loc.state?.message) {
+  const isToastActive = useRef(false);
+
+  if (!user && loc.state?.message && !isToastActive.current) {
+    isToastActive.current = true;
+
     toast({
       title: "Please login to access the cart!!",
       status: "error",
       duration: 3000,
       isClosable: true,
+      onCloseComplete: () => {
+        isToastActive.current = false;
+      },
     });
   }
 
@@ -55,16 +62,13 @@ const Body = () => {
         const res = await fetch(
           `${Base_url}?lat=${location.lat}&lng=${location.long}`
         );
-        
+
         console.log(res);
         const data = await res.json();
 
         const newCards =
-          window.innerWidth > 885
-            ? data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-                ?.restaurants
-            : data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-                ?.restaurants;
+          data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
 
         setAllCard((prevCard) => [...(prevCard || []), ...(newCards || [])]);
         setFilteredCard((prevCard) => [
@@ -88,24 +92,17 @@ const Body = () => {
   }, []);
 
   async function getData() {
-    console.log("location.lat",location.lat);
-    console.log("location.long",location.long);
-
     try {
       const res = await fetch(
         `${Base_url}?lat=${location.lat}&lng=${location.long}`
       );
       const data = await res.json();
 
-      console.log("data :", data);
       setData(data?.data);
 
       const restaurants =
-        window.innerWidth > 885
-          ? data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-              ?.restaurants
-          : data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-              ?.restaurants;
+        data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
 
       setAllCard(restaurants);
       setFilteredCard(restaurants);
@@ -162,10 +159,10 @@ const Body = () => {
         <Box className="restaurant-grid-card">
           {filteredCard?.length > 0 &&
             filteredCard?.map((data, index) => {
-              const uniqueKey = data?.info?.id || `fallback-${index}`
+              const uniqueKey = data?.info?.id || `fallback-${index}`;
               return (
                 <>
-                  <Card key={uniqueKey} {...data?.info} grid="grid"/>
+                  <Card key={uniqueKey} {...data?.info} grid="grid" />
                 </>
               );
             })}
