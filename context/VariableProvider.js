@@ -6,8 +6,8 @@ import { auth } from "../public/Firebase";
 const VariableProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [location, setLocation] = useState({
-    lat: 12.89960,
-    long: 80.22090,
+    lat: 13.0081,
+    long: 77.5648,
   });
 
   useEffect(()=>{
