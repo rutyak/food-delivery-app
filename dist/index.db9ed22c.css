@@ -184,7 +184,7 @@
 
 .QbB8-W_search Input {
   background: #fff;
-  border-radius: 5px;
+  border-radius: 0 5px 0 0;
   width: 450px;
   height: 41px;
   padding-left: 40px;
@@ -679,20 +679,6 @@
   }
 }
 
-@media (width <= 360px) {
-  .cart-item {
-    display: block !important;
-  }
-
-  .cart-item .cart-item-name {
-    margin-left: 0;
-  }
-
-  .cart-item .cart-item-name heading {
-    font-size: 15px;
-  }
-}
-
 .cart-container {
   width: 65%;
 }
@@ -706,6 +692,18 @@
 @media (width <= 360px) {
   .cart-container {
     width: 100%;
+  }
+
+  .cart-item {
+    display: block !important;
+  }
+
+  .cart-item .cart-item-name {
+    margin-left: 0;
+  }
+
+  .cart-item .cart-item-name heading {
+    font-size: 15px;
   }
 }
 

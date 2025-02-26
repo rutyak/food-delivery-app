@@ -71,7 +71,7 @@ const Search = ({ setFilteredCard, setSearch, search, allCard, cart }) => {
 
   return (
     <div className={styles.search}>
-      {/* <Accordion allowMultiple>
+      <Accordion allowMultiple>
         <AccordionItem
           className={styles["location-detector"]}
           borderBottomWidth="0px"
@@ -119,7 +119,7 @@ const Search = ({ setFilteredCard, setSearch, search, allCard, cart }) => {
             </Box>
           </AccordionPanel>
         </AccordionItem>
-      </Accordion> */}
+      </Accordion>
 
       <Box position="relative">
         <Image
