@@ -160,6 +160,7 @@ const Body = () => {
           {filteredCard?.length > 0 &&
             filteredCard?.map((data, index) => {
               const uniqueKey = data?.info?.id || `fallback-${index}`;
+              {console.log("data card: ",data)}
               return (
                 <>
                   <Card key={uniqueKey} {...data?.info} grid="grid" />
